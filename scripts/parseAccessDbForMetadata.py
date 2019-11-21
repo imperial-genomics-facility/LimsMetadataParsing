@@ -1,13 +1,13 @@
-import sys,os,argparse
-from ..libs.limsDataParsingFromAccessDb import load_data_from_access_db
-from ..libs.processMetadata import generate_metadata_and_samplesheet
+import argparse
+from igfLimsParsing.limsDataParsingFromAccessDb import load_data_from_access_db
+from igfLimsParsing.processMetadata import generate_metadata_and_samplesheet
 
 parser=argparse.ArgumentParser()
 parser.add_argument('-a','--access_db_path', required=True, help='Path to Access LIMS db')
 parser.add_argument('-q','--quote_file_path', required=True, help='Path to quote xls file')
 parser.add_argument('-o','--output_path', required=True, help='Output dir path for metadta files')
 parser.add_argument('-k','--known_projects_list', required=True, help='File containing list of known projects')
-parser.add_argument('-j','--ucanaccess_jar_path', required=True, help='Pat to ucanaccess jar files')
+parser.add_argument('-j','--ucanaccess_jar_path', required=True, help='Path to ucanaccess jar files')
 args=parser.parse_args()
 
 access_db_path = args.access_db_path
