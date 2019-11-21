@@ -9,7 +9,7 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 version = "0.0.1"
 
 setup(
-    name = "igfLims",
+    name = "igfLimsParsing",
     version = version,
     description = "A pyspark based codebase for fetching and formatting metadata from a LIMS db for IGF",
     url = "https://github.com/imperial-genomics-facility/LimsMetadataParsing",
@@ -23,8 +23,8 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Software Development :: Testing',
     ],
-    packages = ["igfLims"],
-    zip_safe = False,
+    packages = ["igfLimsParsing"],
+    zip_safe = True,
     tests_require = tests_require,
     test_suite = "test.get_tests",
     license='Apache License 2.0',
