@@ -1,4 +1,4 @@
-from dbTableSchema import get_table_schema
+from igfLimsParsing.dbTableSchema import get_table_schema
 from pyspark.sql.functions import pandas_udf, PandasUDFType
 
 def __get_metadata_df(spark):
