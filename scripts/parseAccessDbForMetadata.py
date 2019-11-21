@@ -1,6 +1,6 @@
 import sys,os,argparse
-import libs.limsDataParsingFromAccessDb import load_data_from_access_db
-import libs.processMetadata import generate_metadata_and_samplesheet
+from libs.limsDataParsingFromAccessDb import load_data_from_access_db
+from libs.processMetadata import generate_metadata_and_samplesheet
 
 parser=argparse.ArgumentParser()
 parser.add_argument('-a','--access_db_path', required=True, help='Path to Access LIMS db')
