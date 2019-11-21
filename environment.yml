@@ -1,0 +1,21 @@
+channels:
+  - conda-forge
+  - defaults
+  - bioconda
+dependencies:
+  - python=3.6.0
+  - pyarrow=0.13.0
+  - pyodbc=4.0.24
+  - java-jdk=8.0.112
+  - pip
+    - JPype1==0.6.3
+    - JayDeBeApi==1.1.1
+    - pyspark==2.4.4
+    - pandas==0.24.2
+    - jupyter-client==5.3.4
+    - jupyter-console==6.0.0
+    - jupyter-core==4.6.1
+    - jinja2==2.10.3
+    - xlrd==1.2.0
+
+
