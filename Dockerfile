@@ -39,5 +39,8 @@ RUN conda env create -q -n spark-env --file /home/$NB_USER/environment.yml && \
     rm -rf /home/$NB_USER/tmp && \
     mkdir -p /home/$NB_USER/tmp && \
     mkdir -p /home/$NB_USER/.cache
+ ADD igfLimsParsing /home/$NB_USER/LimsMetadataParsing/igfLimsParsing
+ ADD scripts /home/$NB_USER/LimsMetadataParsing/scripts
+ ENV PYTHONPATH $PYTHONPATH:/home/$NB_USER/LimsMetadataParsing/
  ENTRYPOINT ["/usr/local/bin/tini", "--"]
  CMD ["/bin/bash"]
