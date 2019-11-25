@@ -10,7 +10,7 @@ def __get_metadata_df(spark):
       select
       concat(project.QuoteID,'_', project.ProjectTag) as project_igf_id,
       sample.IGFID as sample_igf_id,
-      sample.Species as species,
+      sample.Species as species_text,
       sample.`Sample Name` as sample_submitter_id,
       project.Library_Preparation as library_preparation,
       sample.`Sample type` as sample_type,
