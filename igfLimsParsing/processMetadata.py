@@ -150,7 +150,7 @@ def generate_metadata_and_samplesheet(spark,project_data,sample_data,premadelibs
       read.\
       format('csv').\
       option('header','true').\
-      option('path','sql.csv').\
+      option('path',registered_projects_csv).\
       option('sep','\t').\
       load()
     registered_projects.createOrReplaceTempView('registered_projects')
