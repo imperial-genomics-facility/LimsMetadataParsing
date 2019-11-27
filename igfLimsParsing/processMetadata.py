@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import logging
 from igfLimsParsing.dbTableSchema import get_table_schema
 from pyspark.sql.functions import pandas_udf, PandasUDFType
 
@@ -75,14 +76,17 @@ def __get_samplesheet_df(spark):
     all_new_project_samplesheet = \
     spark.sql("""
       select
-      sample.IGFID,
-      library.Library_Name,
-      library.Index_1_ID,
-      library.Index1_Sequence,
-      library.Index_2_ID,
-      library.Index2_Sequence,
-      concat(project.QuoteID,'_', project.ProjectTag) as project_igf_id,
-      library.Pool_no
+      sample.IGFID as Sample_ID,
+      library.Library_Name as Sample_Name,
+      library.Container_ID as Sample_Plate,
+      library.Well_Position as Sample_Well,
+      library.Index_1_ID as I7_Index_ID,
+      library.Index1_Sequence as index,
+      library.Index_2_ID as I5_Index_ID,
+      library.Index2_Sequence as index2,
+      concat(project.QuoteID,'_', project.ProjectTag) as Sample_Project,
+      '' as Description,
+      library.Pool_no as Pool_Number
       from
       (
         select 
@@ -173,7 +177,7 @@ def generate_metadata_and_samplesheet(spark,project_data,sample_data,premadelibs
     metadata_records_count = \
       all_new_project_metadata.groupby('project_igf_id').apply(__print_grp).count()
     all_new_project_samplesheet = __get_samplesheet_df(spark=spark)
-
+    logging.info('new project metadata count: {0}'.format(metadata_records_count))
     ## Pandas udf for samplesheet files
     @pandas_udf(all_new_project_samplesheet.schema, PandasUDFType.GROUPED_MAP)
     def __print_samplesheet_grp(pdf):
@@ -190,5 +194,6 @@ def generate_metadata_and_samplesheet(spark,project_data,sample_data,premadelibs
 
     samplesheet_records_count = \
       all_new_project_samplesheet.groupby('project_igf_id').apply(__print_samplesheet_grp).count()
+    logging.info('new project samplesheet count: {0}'.format(samplesheet_records_count))
   except Exception as e:
     raise ValueError('Failed to create new metadata and samplesheet files, error: {0}'.format(e))
