@@ -168,6 +168,7 @@ def generate_metadata_and_samplesheet(spark,project_data,sample_data,premadelibs
           raise TypeError('Expecting a Pandas df, got: {0}'.format(type(pdf)))
         out_dir = OUT_DIR_BC.value
         qid = pdf.drop_duplicates().get('project_igf_id').values[0]
+        qid = qid.replace(' ','_')
         csv_output = os.path.join(out_dir,"{0}.csv".format(qid))
         pdf.drop_duplicates().to_csv(csv_output,index=False)
         return pdf
@@ -186,6 +187,7 @@ def generate_metadata_and_samplesheet(spark,project_data,sample_data,premadelibs
           raise TypeError('Expecting a Pandas df, got: {0}'.format(type(pdf)))
         out_dir = OUT_DIR_BC.value
         qid = pdf.drop_duplicates().get('Sample_Project').values[0]
+        qid = qid.replace(' ','_')
         csv_output = os.path.join(out_dir,"{0}_SampleSheet.csv".format(qid))
         pdf.drop_duplicates().to_csv(csv_output,index=False)
         return pdf
