@@ -185,7 +185,7 @@ def generate_metadata_and_samplesheet(spark,project_data,sample_data,premadelibs
         if not isinstance(pdf,pd.DataFrame):
           raise TypeError('Expecting a Pandas df, got: {0}'.format(type(pdf)))
         out_dir = OUT_DIR_BC.value
-        qid = pdf.drop_duplicates().get('project_igf_id').values[0]
+        qid = pdf.drop_duplicates().get('Sample_Project').values[0]
         csv_output = os.path.join(out_dir,"{0}_SampleSheet.csv".format(qid))
         pdf.drop_duplicates().to_csv(csv_output,index=False)
         return pdf
@@ -193,7 +193,7 @@ def generate_metadata_and_samplesheet(spark,project_data,sample_data,premadelibs
         raise ValueError(e)
 
     samplesheet_records_count = \
-      all_new_project_samplesheet.groupby('project_igf_id').apply(__print_samplesheet_grp).count()
+      all_new_project_samplesheet.groupby('Sample_Project').apply(__print_samplesheet_grp).count()
     logging.info('new project samplesheet count: {0}'.format(samplesheet_records_count))
   except Exception as e:
     raise ValueError('Failed to create new metadata and samplesheet files, error: {0}'.format(e))
