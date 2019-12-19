@@ -64,7 +64,7 @@ def __get_metadata_df(spark):
       as table4
       join project on project.QuoteID=table4.QuoteID
       join sample on project.ID = sample.ProjectID
-      join library on project.ID=library.ProjectID and sample.`Sample Name`=library.`Library_Name`
+      left join library on project.ID=library.ProjectID and sample.`Sample Name`=library.`Library_Name`
       join quotes on project.QuoteID = quotes.QuoteID 
     """)
     return all_new_project_metadata
@@ -129,7 +129,7 @@ def __get_samplesheet_df(spark):
       as table4
       join project on project.QuoteID=table4.QuoteID
       join sample on project.ID = sample.ProjectID
-      join library on project.ID=library.ProjectID and sample.`Sample Name`=library.`Library_Name`
+      left join library on project.ID=library.ProjectID and sample.`Sample Name`=library.`Library_Name`
       order by library.Pool_no
     """)
     return all_new_project_samplesheet
