@@ -119,7 +119,7 @@ def __get_samplesheet_df(spark):
           where
           table2.project_igf_id is null
           and
-          project.DateCreated > '2019'
+          project.DateCreated > '2020'
           order by project.DateCreated desc
         )
         as table3
