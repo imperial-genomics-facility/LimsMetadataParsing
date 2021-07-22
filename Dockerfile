@@ -45,10 +45,10 @@ RUN conda env create -q -n spark-env --file /home/$NB_USER/environment.yml && \
     rm -rf /home/$NB_USER/tmp && \
     mkdir -p /home/$NB_USER/tmp && \
     mkdir -p /home/$NB_USER/.cache
-RUN wget --quiet --no-check-certificate -O /home/$NB_USER/UCanAccess-4.0.4-bin.zip https://downloads.sourceforge.net/project/ucanaccess/UCanAccess-4.0.4-bin.zip && \
+RUN wget --quiet --no-check-certificate -O /home/$NB_USER/UCanAccess-5.0.1.bin.zip https://downloads.sourceforge.net/project/ucanaccess/UCanAccess-5.0.1.bin.zip && \
     cd /home/$NB_USER/ && \
-    unzip UCanAccess-4.0.4-bin.zip && \
-    rm -f /home/$NB_USER/UCanAccess-4.0.4-bin.zip
+    unzip UCanAccess-5.0.1.bin.zip && \
+    rm -f /home/$NB_USER/UCanAccess-5.0.1.bin.zip
 RUN mkdir -p /home/$NB_USER/LimsMetadataParsing/ && \
     chmod -R u+w /home/$NB_USER/LimsMetadataParsing/
 ADD igfLimsParsing /home/$NB_USER/LimsMetadataParsing/igfLimsParsing
