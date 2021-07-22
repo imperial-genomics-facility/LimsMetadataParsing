@@ -16,6 +16,8 @@ RUN useradd -m -s /bin/bash -N -u $NB_UID $NB_USER && \
       locales \
       wget \
       unzip \
+      gcc \
+      g++ \
       build-essential && \
     locale-gen en_US.UTF-8 && \
     dpkg-reconfigure locales && \
