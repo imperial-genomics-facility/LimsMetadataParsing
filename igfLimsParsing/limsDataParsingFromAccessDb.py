@@ -1,25 +1,29 @@
-import os,jaydebeapi
+import os, jaydebeapi
 import pandas as pd
 
-def load_data_from_access_db(access_db_path,quotes_xls_path,ucanaccess_jar_path):
+def load_data_from_access_db(
+      access_db_path, quotes_xls_path, ucanaccess_jar_path,
+      required_ucanaccess_jars=(
+        'ucanaccess-4.0.4.jar',
+        'lib/commons-lang-2.6.jar',
+        'lib/commons-logging-1.1.3.jar',
+        'lib/hsqldb.jar',
+        'lib/jackcess-2.1.11.jar')):
   try:
     project_data,sample_data,premadelibs_data,quotes_data = \
-      __read_data_from_access_and_xls_file(\
+      __read_data_from_access_and_xls_file(
         access_db_path=access_db_path,
         quotes_xls_path=quotes_xls_path,
-        ucanaccess_jar_path=ucanaccess_jar_path)
+        ucanaccess_jar_path=ucanaccess_jar_path,
+        required_ucanaccess_jars=required_ucanaccess_jars)
     return project_data,sample_data,premadelibs_data,quotes_data
   except Exception as e:
-    raise ValueError('Failed to parse access db, eooro: {0}'.format(e))
+    raise ValueError('Failed to parse access db, error: {0}'.format(e))
 
-def __read_data_from_access_and_xls_file(access_db_path,quotes_xls_path,ucanaccess_jar_path):
+def __read_data_from_access_and_xls_file(
+      access_db_path, quotes_xls_path, ucanaccess_jar_path,
+      required_ucanaccess_jars):
   try:
-    required_ucanaccess_jars = [\
-      'ucanaccess-4.0.4.jar',
-      'lib/commons-lang-2.6.jar',
-      'lib/commons-logging-1.1.3.jar',
-      'lib/hsqldb.jar',
-      'lib/jackcess-2.1.11.jar']
     ucanaccess_jars = list()
     for jar in required_ucanaccess_jars:
       ucanaccess_jars.append( os.path.join(ucanaccess_jar_path,jar))
